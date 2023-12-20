@@ -10,13 +10,11 @@ export default function Home() {
     const [symbol, setSymbol] = useState("BTCUSDT");
     const [interval, setInterval] = useState("1m");
     const [chartData, setChartData] = useState<ChartData[]>([]);
-    const [buyOrders, setBuyOrders] = useState<OrderType[]>([]);
-    const [sellOrders, setSellOrders] = useState<OrderType[]>([]);
+    const [orders, setOrders] = useState<OrderType[]>([]);
 
     useEffect(() => {
         fetchChartData(symbol, interval, setChartData);
-        setBuyOrders([]);
-        setSellOrders([]);
+        setOrders([]);
     }, [symbol, interval]);
 
     useEffect(() => {
@@ -45,20 +43,22 @@ export default function Home() {
         socket.onmessage = (event) => {
             const trade = JSON.parse(event.data);
             if (trade.m) {
-                setBuyOrders((prev) => [
+                setOrders((prev) => [
                     ...prev,
                     {
                         time: trade.T,
                         price: parseFloat(trade.p),
+                        type: "BUY",
                         quantity: parseFloat(trade.q),
                     },
                 ]);
             } else {
-                setSellOrders((prev) => [
+                setOrders((prev) => [
                     ...prev,
                     {
                         time: trade.T,
                         price: parseFloat(trade.p),
+                        type: "SELL",
                         quantity: parseFloat(trade.q),
                     },
                 ]);
@@ -72,12 +72,13 @@ export default function Home() {
     }, [chartData, interval, symbol]);
 
     return (
-        <div className="w-full min-h-screen py-4 bg-transparent flex justify-center items-center flex-col">
-            <Chart chartData={chartData} />
-            <Controls setInterval={setInterval} setSymbol={setSymbol} />
-            <div className="flex flex-col md:flex-row mt-4 gap-4 justify-between w-full px-4 py-2">
-                <OrdersTable heading="Buy Orders" data={buyOrders} />
-                <OrdersTable heading="Sell Orders" data={sellOrders} />
+        <div className="w-full min-h-screen bg-transparent flex flex-col">
+            <div className="flex relative flex-col">
+                <Chart chartData={chartData} />
+                <Controls setInterval={setInterval} setSymbol={setSymbol} />
+            </div>
+            <div className="w-full">
+                <OrdersTable data={orders} />
             </div>
         </div>
     );

@@ -8,7 +8,7 @@ type Props = {
 
 const Chart = (props: Props) => {
     useEffect(() => {
-        const chart = createChart("chart-container", { width: 800, height: 400 });
+        const chart = createChart("chart-container", { width: typeof window !== 'undefined' ? window.outerWidth : 800, height: 400 });
         const chartSeries = chart.addCandlestickSeries();
 
         chartSeries.setData(props.chartData);
@@ -18,7 +18,9 @@ const Chart = (props: Props) => {
         };
     }, [props.chartData]);
 
-    return <div id="chart-container" className="[&>div]:max-w-[80vw] [&>div]:rounded-lg"></div>;
+    return (
+        <div id="chart-container" className="[&>div]:max-w-[89vw] [&>div]:md:max-w-[100vw]"></div>
+    );
 };
 
 export default Chart;

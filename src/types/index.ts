@@ -10,7 +10,7 @@ export interface ChartData {
 
 export interface OrderType {
     time: number;
+    type: "BUY" | "SELL";
     price: number;
     quantity: number;
 }
-

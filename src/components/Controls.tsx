@@ -7,46 +7,29 @@ type Props = {
 
 const Controls = (props: Props) => {
     return (
-        <div className="flex flex-col gap-3 mt-5">
-            <p className="text-center text-lg font-bold text-white">Select Interval</p>
-            <div className="flex gap-3 items-center justify-center">
-                <button
-                    onClick={() => props.setInterval("1m")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
+        <div className="flex justify-between font-bold uppercase flex-wrap absolute bottom-0 z-10 w-full bg-black/70 px-4 py-2 gap-3 mt-5">
+            <div className="flex gap-3 items-center">
+                Select Interval:
+                <button onClick={() => props.setInterval("1m")} className=" text-base rounded hover:text-cyan-300 ">
                     1m
                 </button>
-                <button
-                    onClick={() => props.setInterval("5m")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
+                <button onClick={() => props.setInterval("5m")} className=" text-base rounded hover:text-cyan-300 ">
                     5m
                 </button>
-                <button
-                    onClick={() => props.setInterval("15m")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
+                <button onClick={() => props.setInterval("15m")} className=" text-base rounded hover:text-cyan-300 ">
                     15m
+                </button>
+                <button onClick={() => props.setInterval("1h")} className=" text-base rounded hover:text-cyan-300 ">
+                    1h
                 </button>
             </div>
             <div className="flex gap-3 items-center justify-center">
-                <button
-                    onClick={() => props.setSymbol("BTCUSDT")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
-                    BTCUSDT
+                Select Pair:
+                <button onClick={() => props.setSymbol("BTCUSDT")} className=" text-base rounded hover:text-cyan-300 ">
+                    BTC/USDT
                 </button>
-                <button
-                    onClick={() => props.setSymbol("ETHUSDT")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
-                    ETHUSDT
-                </button>
-                <button
-                    onClick={() => props.setSymbol("BNBUSDT")}
-                    className="bg-white/90 font-bold text-base text-black px-4 py-2 rounded "
-                >
-                    BNBUSDT
+                <button onClick={() => props.setSymbol("ETHUSDT")} className=" text-base rounded hover:text-cyan-300 ">
+                    ETH/USDT
                 </button>
             </div>
         </div>
