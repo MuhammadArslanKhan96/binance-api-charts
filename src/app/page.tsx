@@ -75,7 +75,7 @@ export default function Home() {
         <div className="w-full min-h-screen py-4 bg-transparent flex justify-center items-center flex-col">
             <Chart chartData={chartData} />
             <Controls setInterval={setInterval} setSymbol={setSymbol} />
-            <div className="flex mt-4 gap-4 justify-between w-full px-4 py-2">
+            <div className="flex flex-col md:flex-row mt-4 gap-4 justify-between w-full px-4 py-2">
                 <OrdersTable heading="Buy Orders" data={buyOrders} />
                 <OrdersTable heading="Sell Orders" data={sellOrders} />
             </div>
